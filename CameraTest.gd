@@ -17,15 +17,15 @@ var yuyv_modes: Array
 func _ready() -> void:
 	assign_controls_to_variables()
 	update_cameras()
-	CameraServer.connect("camera_feed_added", self.camera_feed_added)
-	CameraServer.connect("camera_feed_removed", self.camera_feed_removed)
-	cameras.item_selected.connect(on_camera_selected)
-	formats.item_selected.connect(on_format_selected)
-	activate_feed.toggled.connect(on_activate_feed)
-	rgb.toggled.connect(on_yuyv_mode_changed)
-	separate.toggled.connect(on_yuyv_mode_changed)
-	grayscale.toggled.connect(on_yuyv_mode_changed)
-	copy.toggled.connect(on_yuyv_mode_changed)
+	var _ignore = CameraServer.connect("camera_feed_added", self.camera_feed_added)
+	_ignore = CameraServer.connect("camera_feed_removed", self.camera_feed_removed)
+	_ignore = cameras.item_selected.connect(on_camera_selected)
+	_ignore = formats.item_selected.connect(on_format_selected)
+	_ignore = activate_feed.toggled.connect(on_activate_feed)
+	_ignore = rgb.toggled.connect(on_yuyv_mode_changed)
+	_ignore = separate.toggled.connect(on_yuyv_mode_changed)
+	_ignore = grayscale.toggled.connect(on_yuyv_mode_changed)
+	_ignore = copy.toggled.connect(on_yuyv_mode_changed)
 	var button_group := ButtonGroup.new()
 	for button in yuyv_modes:
 		button.button_group = button_group
@@ -64,7 +64,7 @@ func update_cameras() -> void:
 	formats.clear()
 	for index in range(0, CameraServer.get_feed_count()):
 		var camera_feed := CameraServer.get_feed(index)
-		cameras.add_item(camera_feed.get_name())
+		var _ignore = cameras.add_item(camera_feed.get_name())
 
 
 func on_camera_selected(index: int) -> void:
@@ -74,8 +74,8 @@ func on_camera_selected(index: int) -> void:
 		selected_camera_feed.format_changed.disconnect(on_format_changed)
 		selected_camera_feed.frame_changed.disconnect(on_frame_changed)
 	selected_camera_feed = CameraServer.get_feed(index)
-	selected_camera_feed.format_changed.connect(on_format_changed)
-	selected_camera_feed.frame_changed.connect(on_frame_changed)
+	var _ignore = selected_camera_feed.format_changed.connect(on_format_changed)
+	_ignore = selected_camera_feed.frame_changed.connect(on_frame_changed)
 	camera_texture.set_camera_feed_id(selected_camera_feed.get_id())
 	update_formats()
 
@@ -87,7 +87,7 @@ func update_formats() -> void:
 		var fps = str(d["frame_denominator"]) if d["frame_numerator"] == 1 else str(d["frame_denominator"], "/", d["frame_numerator"])
 		if d["frame_numerator"] < 0:
 			fps = "??"
-		formats.add_item("%d: %s %dx%d@%sfps" % [format_index, d["format"], d["width"], d["height"], fps])
+		var _ignore = formats.add_item("%d: %s %dx%d@%sfps" % [format_index, d["format"], d["width"], d["height"], fps])
 		format_index += 1
 	activate_feed.disabled = true
 	for button in yuyv_modes:
@@ -103,7 +103,7 @@ func on_frame_changed() -> void:
 
 
 func on_format_selected(index: int) -> void:
-	var feed_active = activate_feed.pressed
+	var feed_active = activate_feed.is_pressed()
 	deactivate_selected_camera_feed()
 	var parameters := {}
 	if separate.pressed:
@@ -113,12 +113,12 @@ func on_format_selected(index: int) -> void:
 	if copy.pressed:
 		parameters = {"output": "copy"} 
 	if selected_camera_feed:
-		selected_camera_feed.set_format(index, parameters)
+		var _ignore = selected_camera_feed.set_format(index, parameters)
 	activate_feed.disabled = false
 	for button in yuyv_modes:
 		button.disabled = false
 	if feed_active:
-		activate_feed.pressed = true
+		activate_feed.button_pressed = true
 
 
 func on_yuyv_mode_changed(_unused: bool) -> void:
@@ -133,7 +133,7 @@ func camera_feed_removed(_id: int):
 	update_cameras()
 
 func deactivate_selected_camera_feed() -> void:
-	activate_feed.pressed = false
+	activate_feed.button_pressed = false
 	frame_index = 0
 	frame_progress.value = 0
 	

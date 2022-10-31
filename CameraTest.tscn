@@ -6,112 +6,120 @@
 camera_feed_id = 1
 
 [node name="CameraTest" type="HSplitContainer"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( "1_ael7a" )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ael7a")
 
 [node name="Rows" type="VBoxContainer" parent="."]
-offset_right = 1268.0
-offset_bottom = 960.0
+layout_mode = 2
+offset_right = 1140.0
+offset_bottom = 648.0
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ActivateFeed" type="CheckButton" parent="Rows"]
-offset_right = 1268.0
-offset_bottom = 40.0
+layout_mode = 2
+offset_right = 1140.0
+offset_bottom = 31.0
 text = "Activate feed"
 
 [node name="Columns" type="HBoxContainer" parent="Rows"]
-offset_top = 44.0
-offset_right = 1268.0
-offset_bottom = 84.0
+layout_mode = 2
+offset_top = 35.0
+offset_right = 1140.0
+offset_bottom = 66.0
 
 [node name="YUYV" type="Label" parent="Rows/Columns"]
-offset_top = 7.0
-offset_right = 44.0
-offset_bottom = 33.0
+layout_mode = 2
+offset_top = 2.0
+offset_right = 46.0
+offset_bottom = 28.0
 text = "YUYV:"
 
 [node name="RGB" type="CheckButton" parent="Rows/Columns"]
-offset_left = 48.0
-offset_right = 161.0
-offset_bottom = 40.0
+layout_mode = 2
+offset_left = 50.0
+offset_right = 131.0
+offset_bottom = 31.0
 text = "RGB"
 
 [node name="Separate" type="CheckButton" parent="Rows/Columns"]
-offset_left = 165.0
-offset_right = 313.0
-offset_bottom = 40.0
+layout_mode = 2
+offset_left = 135.0
+offset_right = 252.0
+offset_bottom = 31.0
 text = "Separate"
 
 [node name="Grayscale" type="CheckButton" parent="Rows/Columns"]
-offset_left = 317.0
-offset_right = 472.0
-offset_bottom = 40.0
+layout_mode = 2
+offset_left = 256.0
+offset_right = 380.0
+offset_bottom = 31.0
 text = "Grayscale"
 
 [node name="Copy" type="CheckButton" parent="Rows/Columns"]
-offset_left = 476.0
-offset_right = 595.0
-offset_bottom = 40.0
+layout_mode = 2
+offset_left = 384.0
+offset_right = 471.0
+offset_bottom = 31.0
 text = "Copy"
 
 [node name="FrameProgressLabel" type="Label" parent="Rows"]
-offset_top = 88.0
-offset_right = 1268.0
-offset_bottom = 114.0
+layout_mode = 2
+offset_top = 70.0
+offset_right = 1140.0
+offset_bottom = 96.0
 text = "Frame progress:"
 
 [node name="FrameProgress" type="ProgressBar" parent="Rows"]
-offset_top = 118.0
-offset_right = 1268.0
-offset_bottom = 134.0
-rect_min_size = Vector2(0, 16)
+layout_mode = 2
+offset_top = 100.0
+offset_right = 1140.0
+offset_bottom = 127.0
 step = 1.0
 allow_greater = true
-percent_visible = false
 
 [node name="CamerasLabel" type="Label" parent="Rows"]
-offset_top = 138.0
-offset_right = 1268.0
-offset_bottom = 164.0
+layout_mode = 2
+offset_top = 131.0
+offset_right = 1140.0
+offset_bottom = 157.0
 text = "Available cameras:"
 
 [node name="Cameras" type="ItemList" parent="Rows"]
-offset_top = 168.0
-offset_right = 1268.0
-offset_bottom = 177.0
+layout_mode = 2
+offset_top = 161.0
+offset_right = 1140.0
+offset_bottom = 169.0
 auto_height = true
 
 [node name="FormatsLabel" type="Label" parent="Rows"]
-offset_top = 181.0
-offset_right = 1268.0
-offset_bottom = 207.0
+layout_mode = 2
+offset_top = 173.0
+offset_right = 1140.0
+offset_bottom = 199.0
 text = "Available formats:"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Rows"]
-offset_top = 211.0
-offset_right = 1268.0
-offset_bottom = 960.0
+layout_mode = 2
+offset_top = 203.0
+offset_right = 1140.0
+offset_bottom = 648.0
 size_flags_vertical = 3
 
 [node name="Formats" type="ItemList" parent="Rows/ScrollContainer"]
-offset_right = 1268.0
-offset_bottom = 9.0
+layout_mode = 2
+offset_right = 1140.0
+offset_bottom = 8.0
 size_flags_horizontal = 3
 auto_height = true
 
 [node name="CameraRect" type="TextureRect" parent="."]
-offset_left = 1280.0
-offset_right = 1280.0
-offset_bottom = 960.0
-texture = SubResource( "CameraTexture_nl3vh" )
+layout_mode = 2
+offset_left = 1152.0
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = SubResource("CameraTexture_nl3vh")
 stretch_mode = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
