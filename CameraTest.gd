@@ -17,15 +17,15 @@ var yuyv_modes: Array
 func _ready() -> void:
 	assign_controls_to_variables()
 	update_cameras()
-	var _ignore = CameraServer.connect("camera_feed_added", self.camera_feed_added)
-	_ignore = CameraServer.connect("camera_feed_removed", self.camera_feed_removed)
-	_ignore = cameras.item_selected.connect(on_camera_selected)
-	_ignore = formats.item_selected.connect(on_format_selected)
-	_ignore = activate_feed.toggled.connect(on_activate_feed)
-	_ignore = rgb.toggled.connect(on_yuyv_mode_changed)
-	_ignore = separate.toggled.connect(on_yuyv_mode_changed)
-	_ignore = grayscale.toggled.connect(on_yuyv_mode_changed)
-	_ignore = copy.toggled.connect(on_yuyv_mode_changed)
+	CameraServer.connect("camera_feed_added", self.camera_feed_added)
+	CameraServer.connect("camera_feed_removed", self.camera_feed_removed)
+	cameras.item_selected.connect(on_camera_selected)
+	formats.item_selected.connect(on_format_selected)
+	activate_feed.toggled.connect(on_activate_feed)
+	rgb.toggled.connect(on_yuyv_mode_changed)
+	separate.toggled.connect(on_yuyv_mode_changed)
+	grayscale.toggled.connect(on_yuyv_mode_changed)
+	copy.toggled.connect(on_yuyv_mode_changed)
 	var button_group := ButtonGroup.new()
 	for button in yuyv_modes:
 		button.button_group = button_group
@@ -99,7 +99,7 @@ func on_format_changed() -> void:
 
 func on_frame_changed() -> void:
 	frame_index = (frame_index + 1) % 100
-	frame_progress.set_value(frame_index)
+	frame_progress.call_deferred("set_value", frame_index)
 
 
 func on_format_selected(index: int) -> void:
