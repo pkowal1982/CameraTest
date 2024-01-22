@@ -1,3 +1,4 @@
+@uid("uid://cawewntpsnj1w") # Generated automatically, do not modify.
 extends Node
 
 var cameras: ItemList
@@ -106,11 +107,11 @@ func on_format_selected(index: int) -> void:
 	var feed_active = activate_feed.is_pressed()
 	deactivate_selected_camera_feed()
 	var parameters := {}
-	if separate.pressed:
+	if separate.is_pressed():
 		parameters = {"output": "separate"} 
-	if grayscale.pressed:
+	if grayscale.is_pressed():
 		parameters = {"output": "grayscale"} 
-	if copy.pressed:
+	if copy.is_pressed():
 		parameters = {"output": "copy"} 
 	if selected_camera_feed:
 		var _ignore = selected_camera_feed.set_format(index, parameters)
@@ -126,11 +127,11 @@ func on_yuyv_mode_changed(_unused: bool) -> void:
 
 
 func camera_feed_added(_id: int):
-	update_cameras()
+	update_cameras.call_deferred()
 
 
 func camera_feed_removed(_id: int):
-	update_cameras()
+	update_cameras.call_deferred()
 
 func deactivate_selected_camera_feed() -> void:
 	activate_feed.button_pressed = false
