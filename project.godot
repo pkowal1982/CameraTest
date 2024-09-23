@@ -12,10 +12,17 @@ config_version=5
 
 config/name="Camera Test"
 run/main_scene="res://CameraTest.tscn"
-config/features=PackedStringArray("4.1")
+config/features=PackedStringArray("4.4")
 config/icon="res://icon.svg"
 
 [display]
 
 window/size/width=1280
 window/size/height=960
+
+[input]
+
+xxx={
+"deadzone": 0.5,
+"events": []
+}

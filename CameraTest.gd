@@ -1,4 +1,3 @@
-@uid("uid://cawewntpsnj1w") # Generated automatically, do not modify.
 extends Node
 
 var cameras: ItemList
@@ -93,6 +92,7 @@ func update_formats() -> void:
 	activate_feed.disabled = true
 	for button in yuyv_modes:
 		button.disabled = true
+
 
 func on_format_changed() -> void:
 	print("Format changed")
